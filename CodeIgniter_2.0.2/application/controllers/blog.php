@@ -6,6 +6,8 @@ class Blog extends CI_Controller {
         $data['title'] = "Title Blog index";
         $data['heading'] = "Heading Blog index";
         $data['todo_list'] = array('Clean House', 'Call Mom', 'Run Errands');
+        $data['classname'] = get_class($this);
+echo "site_url: ".$this->config->site_url()."<br>";
 
         $this->load->view('blog/blog_index', $data);
     }
