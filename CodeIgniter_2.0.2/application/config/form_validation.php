@@ -1,6 +1,6 @@
 <?php
 $config = array(
-                 'signup' => array(
+                 'form' => array(
                                     array(
                                             'field' => 'username',
                                             'label' => 'ユーザ名',
@@ -22,26 +22,21 @@ $config = array(
                                             'rules' => 'required'
                                          )
                                     ),
-                 'email' => array(
+                 'signup' => array(
                                     array(
-                                            'field' => 'emailaddress',
+                                            'field' => 'user_name',
+                                            'label' => 'ユーザ名',
+                                            'rules' => 'trim|required|alpha_dash|min_length[4]|max_length[50]'
+                                         ),
+                                    array(
+                                            'field' => 'email',
                                             'label' => 'メールアドレス',
-                                            'rules' => 'required|valid_email'
+                                            'rules' => 'trim|required|valid_email|max_length[100]'
                                          ),
                                     array(
-                                            'field' => 'name',
-                                            'label' => '名前',
-                                            'rules' => 'required|alpha'
-                                         ),
-                                    array(
-                                            'field' => 'title',
-                                            'label' => 'タイトル',
-                                            'rules' => 'required'
-                                         ),
-                                    array(
-                                            'field' => 'message',
-                                            'label' => 'メッセージ本文',
-                                            'rules' => 'required'
+                                            'field' => 'pass',
+                                            'label' => 'パスワード',
+                                            'rules' => 'trim|required|single|min_length[8]|max_length[100]'
                                          )
                                     )
                );

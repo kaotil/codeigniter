@@ -11,6 +11,14 @@ class Signup extends CI_Controller {
 
     function regist()
     {
+        $this->load->library(array('form_validation'));
+        if ($this->form_validation->run('signup') == FALSE)
+        {
+            $this->load->view('signup/index');
+            return;
+        }
+
+
 
         $this->load->model('Signup_model');
 

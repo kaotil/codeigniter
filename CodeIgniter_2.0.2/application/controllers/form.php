@@ -18,7 +18,7 @@ class Form extends CI_Controller {
 */
         $data['input'] = $this->input->post();
 
-        if ($this->form_validation->run('signup') == FALSE)
+        if ($this->form_validation->run('form') == FALSE)
         {
             $this->load->view('form/myform');
         }

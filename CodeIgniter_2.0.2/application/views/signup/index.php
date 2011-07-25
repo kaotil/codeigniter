@@ -7,18 +7,20 @@
 
 <h2>Signup</h2>
 <?php
+echo validation_errors();
+
 echo form_open('signup/regist');
 echo form_label('名前','user_name');
 $ndata = array('name' => 'user_name', 'id' => 'id', 'size' => '25');
-echo form_input(array('name' => 'user_name', 'id' => 'id', 'size' => '25'));
+echo form_input(array('name' => 'user_name', 'id' => 'id', 'size' => '25', 'value' => set_value('user_name')));
 echo "<br>";
 
 echo form_label('Eメール','email');
-echo form_input(array('name' => 'email', 'id' => 'email', 'size' => '25'));
+echo form_input(array('name' => 'email', 'id' => 'email', 'size' => '25', 'value' => set_value('email')));
 echo "<br>";
 
 echo form_label('パスワード','pass');
-echo form_input(array('name' => 'pass', 'id' => 'pass', 'size' => '25'));
+echo form_input(array('name' => 'pass', 'id' => 'pass', 'size' => '25', 'value' => set_value('pass')));
 echo "<br><br>";
 
 echo form_submit('submit','登録');
