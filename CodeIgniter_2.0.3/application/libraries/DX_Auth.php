@@ -927,6 +927,9 @@ class DX_Auth
 
         // Destroy session
         $this->ci->session->sess_destroy();
+
+        // Add kaotil
+        $this->ci->session->unset_userdata('DX_logged_in');
     }
 
     function register($username, $password, $email)

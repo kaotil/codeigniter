@@ -126,14 +126,17 @@ class Auth extends CI_Controller
                     }
 
                     // Load login page view
-                    $this->load->view($this->dx_auth->login_view, $data);
+                    $content = $this->load->view($this->dx_auth->login_view, $data, true);
+                    $this->layout->write('title', 'Auth [ login ]')->write('content', $content)->render();
                 }
             }
         }
         else
         {
             $data['auth_message'] = 'You are already logged in.';
-            $this->load->view($this->dx_auth->logged_in_view, $data);
+            #$this->load->view($this->dx_auth->logged_in_view, $data);
+            $content = $this->load->view($this->dx_auth->logged_in_view, $data, true);
+            $this->layout->write('title', 'Auth [ login ]')->write('content', $content)->render();
         }
     }
 
@@ -142,7 +145,9 @@ class Auth extends CI_Controller
         $this->dx_auth->logout();
 
         $data['auth_message'] = 'You have been logged out.';
-        $this->load->view($this->dx_auth->logout_view, $data);
+#        $this->load->view($this->dx_auth->logout_view, $data);
+        $content = $this->load->view($this->dx_auth->logout_view, $data, true);
+        $this->layout->write('title', 'Auth [ logout ]')->write('content', $content)->render();
     }
 
     function register()
@@ -176,7 +181,9 @@ class Auth extends CI_Controller
                 }
 
                 // Load registration success page
-                $this->load->view($this->dx_auth->register_success_view, $data);
+                #$this->load->view($this->dx_auth->register_success_view, $data);
+                $content = $this->load->view($this->dx_auth->register_success_view, $data, true);
+                $this->layout->write('title', 'Auth [ register ]')->write('content', $content)->render();
             }
             else
             {
@@ -187,18 +194,24 @@ class Auth extends CI_Controller
                 }
 
                 // Load registration page
-                $this->load->view($this->dx_auth->register_view);
+                #$this->load->view($this->dx_auth->register_view);
+                $content = $this->load->view($this->dx_auth->register_view, '', true);
+                $this->layout->write('title', 'Auth [ register ]')->write('content', $content)->render();
             }
         }
         elseif ( ! $this->dx_auth->allow_registration)
         {
             $data['auth_message'] = 'Registration has been disabled.';
-            $this->load->view($this->dx_auth->register_disabled_view, $data);
+#            $this->load->view($this->dx_auth->register_disabled_view, $data);
+            $content = $this->load->view($this->dx_auth->register_disabled_view, $data, true);
+            $this->layout->write('title', 'Auth [ register ]')->write('content', $content)->render();
         }
         else
         {
             $data['auth_message'] = 'You have to logout first, before registering.';
-            $this->load->view($this->dx_auth->logged_in_view, $data);
+#            $this->load->view($this->dx_auth->logged_in_view, $data);
+            $content = $this->load->view($this->dx_auth->register_disabled_view, $data, true);
+            $this->layout->write('title', 'Auth [ register ]')->write('content', $content)->render();
         }
     }
 
@@ -238,6 +251,7 @@ class Auth extends CI_Controller
 
                 // Load registration success page
                 $this->load->view($this->dx_auth->register_success_view, $data);
+
             }
             else
             {
@@ -267,12 +281,16 @@ class Auth extends CI_Controller
         if ($this->dx_auth->activate($username, $key))
         {
             $data['auth_message'] = 'Your account have been successfully activated. '.anchor(site_url($this->dx_auth->login_uri), 'Login');
-            $this->load->view($this->dx_auth->activate_success_view, $data);
+#            $this->load->view($this->dx_auth->activate_success_view, $data);
+            $content = $this->load->view($this->dx_auth->activate_success_view, $data, true);
+            $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
         }
         else
         {
             $data['auth_message'] = 'The activation code you entered was incorrect. Please check your email again.';
-            $this->load->view($this->dx_auth->activate_failed_view, $data);
+#            $this->load->view($this->dx_auth->activate_failed_view, $data);
+            $content = $this->load->view($this->dx_auth->activate_failed_view, $data, true);
+            $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
         }
     }
 
@@ -287,11 +305,15 @@ class Auth extends CI_Controller
         if ($val->run() AND $this->dx_auth->forgot_password($val->set_value('login')))
         {
             $data['auth_message'] = 'An email has been sent to your email with instructions with how to activate your new password.';
-            $this->load->view($this->dx_auth->forgot_password_success_view, $data);
+#            $this->load->view($this->dx_auth->forgot_password_success_view, $data);
+            $content = $this->load->view($this->dx_auth->forgot_password_success_view, $data, true);
+            $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
         }
         else
         {
-            $this->load->view($this->dx_auth->forgot_password_view);
+#            $this->load->view($this->dx_auth->forgot_password_view);
+            $content = $this->load->view($this->dx_auth->forgot_password_view, '', true);
+            $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
         }
     }
 
@@ -305,12 +327,16 @@ class Auth extends CI_Controller
         if ($this->dx_auth->reset_password($username, $key))
         {
             $data['auth_message'] = 'You have successfully reset you password, '.anchor(site_url($this->dx_auth->login_uri), 'Login');
-            $this->load->view($this->dx_auth->reset_password_success_view, $data);
+#            $this->load->view($this->dx_auth->reset_password_success_view, $data);
+            $content = $this->load->view($this->dx_auth->reset_password_success_view, $data, true);
+            $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
         }
         else
         {
             $data['auth_message'] = 'Reset failed. Your username and key are incorrect. Please check your email again and follow the instructions.';
-            $this->load->view($this->dx_auth->reset_password_failed_view, $data);
+#            $this->load->view($this->dx_auth->reset_password_failed_view, $data);
+            $content = $this->load->view($this->dx_auth->reset_password_failed_view, $data, true);
+            $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
         }
     }
 
@@ -330,11 +356,15 @@ class Auth extends CI_Controller
             if ($val->run() AND $this->dx_auth->change_password($val->set_value('old_password'), $val->set_value('new_password')))
             {
                 $data['auth_message'] = 'Your password has successfully been changed.';
-                $this->load->view($this->dx_auth->change_password_success_view, $data);
+#                $this->load->view($this->dx_auth->change_password_success_view, $data);
+                $content = $this->load->view($this->dx_auth->change_password_success_view, $data, true);
+                $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
             }
             else
             {
-                $this->load->view($this->dx_auth->change_password_view);
+#                $this->load->view($this->dx_auth->change_password_view);
+                $content = $this->load->view($this->dx_auth->change_password_view, '', true);
+                $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
             }
         }
         else
@@ -362,7 +392,9 @@ class Auth extends CI_Controller
             }
             else
             {
-                $this->load->view($this->dx_auth->cancel_account_view);
+#                $this->load->view($this->dx_auth->cancel_account_view);
+                $content = $this->load->view($this->dx_auth->cancel_account_view, '', true);
+                $this->layout->write('title', 'Auth [ activate ]')->write('content', $content)->render();
             }
         }
         else
